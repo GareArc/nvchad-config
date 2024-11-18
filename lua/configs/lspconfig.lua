@@ -25,13 +25,10 @@ end
 
 -- other lsps
 
-local servers =  {
-  gopls = require("configs.lsp.gopls")
-}
+local servers = require "configs.lsp"
 
-
-for name, lsp in pairs(servers) do
-  lspconfig[name].setup(lsp)
+for _, lsp in pairs(servers) do
+  lsp.setup(lspconfig, nvlsp)
 end
 
 
