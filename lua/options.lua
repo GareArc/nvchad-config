@@ -33,3 +33,5 @@ o.showtabline = 2
 -- clipboard
 opt.clipboard = "unnamedplus"
 
+-- disable defualt mouse menu
+opt.mouse = ""
