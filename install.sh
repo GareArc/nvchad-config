@@ -26,10 +26,10 @@ curl -Lo $TEMP_DIR/nvim-linux64.tar.gz $NEOVIM_URL
 
 log "Extracting Neovim release..."
 tar -xzf $TEMP_DIR/nvim-linux64.tar.gz -C $TEMP_DIR
-sudo mv $TEMP_DIR/nvim-linux64 /usr/local/
+mv $TEMP_DIR/nvim-linux64 /usr/local/
 
 log "Setting up Neovim binary..."
-sudo ln -sf /usr/local/nvim-linux64/bin/nvim /usr/bin/nvim
+ln -sf /usr/local/nvim-linux64/bin/nvim /usr/bin/nvim
 
 # Verify installation
 log "Verifying Neovim installation..."
