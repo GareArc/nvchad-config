@@ -21,6 +21,12 @@ return {
       vim.keymap.set('x', '<C-_>', function()
         require('Comment.api').toggle.linewise(vim.fn.visualmode())
       end, { desc = 'Toggle comment on selected lines' })
+
+      -- Map Ctrl+Shift+/ in visual mode to toggle block comments
+      vim.keymap.set('x', '<C-S-_>', function()
+        require('Comment.api').toggle.blockwise(vim.fn.visualmode())
+      end, { desc = 'Toggle block comment on selected lines' })
+
     end,
   },
 }
