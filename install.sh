@@ -69,6 +69,10 @@ if ! command -v npm &> /dev/null; then
         log "npm installation failed. Please check for issues."
         exit 1
     fi
+    
+    # reload shell
+    log "Reloading $SHELL_CONFIG..."
+    source "$SHELL_CONFIG"
 else
     log "npm is already installed."
 fi
