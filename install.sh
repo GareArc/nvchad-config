@@ -7,15 +7,18 @@ log() {
 
 # Update the system package list
 log "Updating system package list..."
-apt-get update -y
+sudo apt-get update -y
 
 # Install essential build tools
 log "Installing essential build tools..."
-apt-get install -y build-essential cmake unzip curl tar git
+sudo apt-get install -y build-essential cmake unzip curl tar git
 
 # Install ripgrep (for Telescope plugin and text search)
 log "Installing ripgrep..."
-apt-get install -y ripgrep
+sudo apt-get install -y ripgrep
+
+# Install xclip
+sudo apt install xclip -y
 
 # Download and install Neovim from the official release page
 log "Downloading Neovim release..."
@@ -50,5 +53,6 @@ log "NeoVim installation completed."
 log "Configuring NvChad..."
 
 rm -rf ~/.config/nvim
+mkdir -p ~/.config/nvim 
 git clone https://github.com/GareArc/nvchad-config ~/.config/nvim
 log "Installation completes. Type nvim to start."
