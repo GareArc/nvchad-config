@@ -29,7 +29,7 @@ if ! command -v npm &> /dev/null; then
         log "nvm not found. Installing nvm..."
         
         # Install nvm
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | sudo bash
         
         # Source nvm script to make it available in this shell session
         export NVM_DIR="$HOME/.nvm"
