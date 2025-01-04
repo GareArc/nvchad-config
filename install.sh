@@ -5,6 +5,15 @@ log() {
     echo "[INFO] $1"
 }
 
+# Determine the appropriate shell configuration file
+if [ -f "$HOME/.zshrc" ]; then
+    SHELL_CONFIG="$HOME/.zshrc"
+    log "Using .zshrc for configuration."
+else
+    SHELL_CONFIG="$HOME/.bashrc"
+    log "Using .bashrc for configuration."
+fi
+
 # Update the system package list
 log "Updating system package list..."
 sudo apt-get update -y
@@ -36,9 +45,9 @@ if ! command -v npm &> /dev/null; then
         ) && \. "$NVM_DIR/nvm.sh" 
 
         # add to bashrc
-        echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
-        echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.bashrc
-        echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.bashrc
+        echo 'export NVM_DIR="$HOME/.nvm"' >> $SHELL_CONFIG
+        echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> $SHELL_CONFIG
+        echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> $SHELL_CONFIG
 
         # Source nvm script to make it available in this shell session
         export NVM_DIR="$HOME/.nvm"
