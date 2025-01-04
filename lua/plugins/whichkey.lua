@@ -5,8 +5,8 @@ return {
     cmd = "WhichKey",
     opts = function()
       require("which-key").setup({
-        triggers = "auto",     -- Automatically show Which-Key on <leader>
-        window = {
+        triggers = { "auto" },     -- Automatically show Which-Key on <leader>
+        win = {
           border = "rounded",  -- Optional: Customize the menu border
           position = "bottom", -- Always show Which-Key at the bottom
         },

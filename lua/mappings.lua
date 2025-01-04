@@ -1,6 +1,5 @@
 require "nvchad.mappings"
 -- add yours here
-local comment = require "Comment"
 local map = vim.keymap.set
 
 --Remap space as leader key
@@ -40,21 +39,21 @@ map("v", "<C-a>", "<Esc>ggVG", { desc = "Select all text in current buffer" })
 
 -- Normal --
 -- Better window navigation
-map("n", "<C-Left>", "<C-w>h")
-map("n", "<C-Down>", "<C-w>j")
-map("n", "<C-Up>", "<C-w>k")
-map("n", "<C-Right>", "<C-w>l")
+map("n", "<C-S-Left>", "<C-w>h")
+map("n", "<C-S-Down>", "<C-w>j")
+map("n", "<C-S-Up>", "<C-w>k")
+map("n", "<C-S-Right>", "<C-w>l")
 map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
 
 -- Resize with arrows
-map("n", "<C-j>", ":resize +2<CR>")
-map("n", "<C-k>", ":resize -2<CR>")
-map("n", "<C-l>", ":vertical resize -2<CR>")
-map("n", "<C-h>", ":vertical resize +2<CR>")
+map("n", "<S-j>", ":resize +2<CR>")
+map("n", "<S-k>", ":resize -2<CR>")
+map("n", "<S-l>", ":vertical resize -2<CR>")
+map("n", "<S-h>", ":vertical resize +2<CR>")
 
 -- Navigate buffers
-map("n", "<S-Left>", ":bnext<CR>")
-map("n", "<S-Right>", ":bprevious<CR>")
+map("n", "<S-Right>", ":bnext<CR>")
+map("n", "<S-Left>", ":bprevious<CR>")
 
 -- Visual --
 -- Stay in indent mode
@@ -75,10 +74,10 @@ map("x", "<A-Up>", ":move '<-2<CR>gv-gv")
 
 -- Terminal --
 -- Better terminal navigation
-map("t", "<C-Left>", "<C-\\><C-N><C-w>h")
-map("t", "<C-Down>", "<C-\\><C-N><C-w>j")
-map("t", "<C-Up>", "<C-\\><C-N><C-w>k")
-map("t", "<C-Right>", "<C-\\><C-N><C-w>l")
+map("t", "<C-S-Left>", "<C-\\><C-N><C-w>h", { desc = "Terminal navigate left" })
+map("t", "<C-S-Down>", "<C-\\><C-N><C-w>j", { desc = "Terminal navigate down" })
+map("t", "<C-S-Up>", "<C-\\><C-N><C-w>k", { desc = "Terminal navigate up" })
+map("t", "<C-S-Right>", "<C-\\><C-N><C-w>l", { desc = "Terminal navigate right" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -111,3 +110,36 @@ map("n", "<A-Left>", "<C-o>", { desc = "Go to previous cursor position" })
 map("n", "<A-Right>", "<C-i>", { desc = "Go to next cursor position" })
 map("i", "<A-Left>", "<C-o>", { desc = "Go to previous cursor position" })
 map("i", "<A-Right>", "<C-i>", { desc = "Go to next cursor position" })
+
+
+-- Word Selection
+map('i', '<C-S-Left>', '<Esc>vB', { desc = 'Select word to the left' })
+map('v', '<C-S-Left>', 'B', { desc = 'Select word to the left in visual mode' })
+
+map('i', '<C-S-Right>', '<Esc>ve', { desc = 'Select word to the right' })
+map('v', '<C-S-Right>', 'e', { desc = 'Select word to the right in visual mode' })
+
+map('i', '<C-S-Up>', '<Esc>vk0', { desc = 'Extend selection line up' })
+map('v', '<C-S-Up>', 'k0', { desc = 'Extend selection line up in visual mode' })
+
+map('i', '<C-S-Down>', '<Esc>vj$', { desc = 'Select block down' })
+map('v', '<C-S-Down>', 'j$', { desc = 'Select block down in visual mode' })
+
+-- Copy, Paste, Cut, Delete, Undo, Redo in visial mode
+map('v', '<C-c>', '"+y', { desc = 'Copy selected text' })
+map('v', '<C-x>', '"+x', { desc = 'Cut selected text' })
+map('v', '<C-v>', '"+p', { desc = 'Paste text' })
+map('v', '<BS>', 'd', { desc = 'Delete selected text' })
+-- Disable Ctrl+C in insert mode (acts as an interrupt signal by default)
+map('i', '<C-c>', '<Nop>', { desc = 'Disable Ctrl+C in insert mode' })
+-- Disable Ctrl+C in command mode (useful if typing a command)
+map('c', '<C-c>', '<Nop>', { desc = 'Disable Ctrl+C in command mode' })
+
+-- Shift + ' to wrap selection with single quotes
+map('v', "'", "c'<C-r>\"'<Esc>", { desc = 'Wrap selection with single quotes' })
+-- Shift + " to wrap selection with double quotes
+map('v', '"', 'c"<C-r>\""<Esc>', { desc = 'Wrap selection with double quotes' })
+-- Shift + ( to wrap selection with parentheses
+map('v', '(', "c(<C-r>\")<Esc>", { desc = 'Wrap selection with parantheses' })
+-- Shift + { to wrap selection with braces
+map('v', '{', "c{<C-r>\"}<Esc>", { desc = 'Wrap selection with braces' })

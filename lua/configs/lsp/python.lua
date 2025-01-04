@@ -32,10 +32,10 @@ M.setup = function(lspconfig, nvlsp)
         },
       },
     },
-    before_init = function (_, config)
-      local cwd = vim.fn.getcwd()
-      config.settings.python.pythonPath = get_python_path(cwd)
-    end,
+    -- before_init = function (_, config)
+    --   local cwd = vim.fn.getcwd()
+    --   config.settings.python.pythonPath = get_python_path(cwd)
+    -- end,
   }
 end
 
