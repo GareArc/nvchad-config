@@ -29,8 +29,11 @@ if ! command -v npm &> /dev/null; then
         log "nvm not found. Installing nvm..."
         
         # Install nvm
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | sudo bash
-        
+        export NVM_DIR="$HOME/.nvm" && (
+          git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+          cd "$NVM_DIR"
+          git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+        ) && \. "$NVM_DIR/nvm.sh" 
         # Source nvm script to make it available in this shell session
         export NVM_DIR="$HOME/.nvm"
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
