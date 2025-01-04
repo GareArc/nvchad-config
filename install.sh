@@ -20,6 +20,41 @@ sudo apt-get install -y ripgrep
 # Install xclip
 sudo apt install xclip -y
 
+# Check if npm is installed
+if ! command -v npm &> /dev/null; then
+    log "npm not found. Installing Node.js using nvm..."
+
+    # Check if nvm is installed
+    if ! command -v nvm &> /dev/null; then
+        log "nvm not found. Installing nvm..."
+        
+        # Install nvm
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+        
+        # Source nvm script to make it available in this shell session
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+    fi
+
+    # Install the LTS version of Node.js
+    log "Installing Node.js LTS version..."
+    nvm install --lts
+    
+    # Use the installed LTS version
+    nvm use --lts
+    
+    # Verify npm installation
+    if command -v npm &> /dev/null; then
+        log "npm successfully installed."
+    else
+        log "npm installation failed. Please check for issues."
+        exit 1
+    fi
+else
+    log "npm is already installed."
+fi
+
 # Download and install Neovim from the official release page
 log "Downloading Neovim release..."
 NEOVIM_VERSION=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
