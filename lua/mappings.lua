@@ -88,7 +88,7 @@ map("i", "jk", "<ESC>")
 local telescope_builtin = require "telescope.builtin"
 map("n", "<C-A-p>", telescope_builtin.find_files, { desc = "Telescope find files" })
 map("n", "<C-p>", telescope_builtin.git_files, { desc = "Telescope find git files" })
-map("n", "<C-S-f>", telescope_builtin.grep_string, { desc = "Telescope grep string" })
+map("n", "<C-S-f>", telescope_builtin.live_grep, { desc = "Telescope live grep" })
 
 -- whichkey
 -- map('n', '<leader>?', function()
@@ -111,7 +111,7 @@ map("n", "<A-Right>", "<C-i>", { desc = "Go to next cursor position" })
 map("i", "<A-Left>", "<C-o>", { desc = "Go to previous cursor position" })
 map("i", "<A-Right>", "<C-i>", { desc = "Go to next cursor position" })
 
-
+map("n", "<leader>gr", ":Telescope lsp_references<CR>", { desc = "Show references" })
 -- Word Selection
 map('i', '<C-S-Left>', '<Esc>vB', { desc = 'Select word to the left' })
 map('v', '<C-S-Left>', 'B', { desc = 'Select word to the left in visual mode' })
