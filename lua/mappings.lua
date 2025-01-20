@@ -129,7 +129,10 @@ map('v', '<C-S-Down>', 'j$', { desc = 'Select block down in visual mode' })
 map('v', '<C-c>', '"+y', { desc = 'Copy selected text' })
 map('v', '<C-x>', '"+x', { desc = 'Cut selected text' })
 map('v', '<C-v>', '"+p', { desc = 'Paste text' })
-map('v', '<BS>', 'd', { desc = 'Delete selected text' })
+map('v', '<BS>', '_d', { desc = 'Delete selected text' })
+
+map('n', 'd', '"_d', { desc = 'Delete without yanking' })
+map('v', 'd', '"_d', { desc = 'Delete without yanking' })
 -- Disable Ctrl+C in insert mode (acts as an interrupt signal by default)
 map('i', '<C-c>', '<Nop>', { desc = 'Disable Ctrl+C in insert mode' })
 -- Disable Ctrl+C in command mode (useful if typing a command)
@@ -143,3 +146,7 @@ map('v', '"', 'c"<C-r>\""<Esc>', { desc = 'Wrap selection with double quotes' })
 map('v', '(', "c(<C-r>\")<Esc>", { desc = 'Wrap selection with parantheses' })
 -- Shift + { to wrap selection with braces
 map('v', '{', "c{<C-r>\"}<Esc>", { desc = 'Wrap selection with braces' })
+
+-- search nav
+map('n', '<C-S-Up>', 'N', { desc = 'Previous search match' })
+map('n', '<C-S-Down>', 'n', { desc = 'Next search match' })
