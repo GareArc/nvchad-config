@@ -16,6 +16,87 @@ This guide will install a cross-platform NVChad configuration with VSCode-compat
 
 Before starting, verify the following:
 
+### 0. Install Required Dependencies
+
+The following tools are required for NvChad to function properly. You'll be asked before installing each one.
+
+#### Required Tools:
+
+**Git** - For cloning repositories
+```bash
+git --version
+```
+
+**Node.js & npm** - For language servers and plugins
+```bash
+node --version && npm --version
+```
+
+**Neovim 0.11+** - The editor itself
+```bash
+nvim --version
+```
+
+**Nerd Font** - For proper icon display in terminal
+- Install from https://www.nerdfonts.com/
+- Recommended: JetBrainsMono Nerd Font (NOT the Mono variant)
+- Set as your terminal font
+
+#### Optional but Recommended Tools:
+
+**Tree-sitter CLI** - Required by nvim-treesitter for syntax highlighting
+```bash
+tree-sitter --version
+```
+
+**Ripgrep** - For fast grep searching with Telescope
+```bash
+rg --version
+```
+
+**GCC/Clang** - For compiling plugins
+```bash
+gcc --version  # or clang --version
+```
+
+**Make** - For building plugins
+```bash
+make --version
+```
+
+**Python 3** - For Python language server and plugins
+```bash
+python3 --version
+```
+
+**Unzip & Tar** - For extracting archives
+```bash
+unzip -v && tar --version
+```
+
+**Clipboard Tools** - For system clipboard integration
+- **Linux (X11)**: `xclip` or `xsel`
+- **Linux (Wayland)**: `wl-copy` and `wl-paste`
+- **macOS**: Built-in (no installation needed)
+- **Windows**: Built-in (no installation needed)
+
+**Ask user**: "Would you like me to check for missing dependencies and optionally install them? (yes/no)"
+
+If user says yes, check each tool and ask before installing:
+```bash
+# Example for macOS
+brew install git node neovim ripgrep tree-sitter gcc make python3 unzip
+
+# Example for Ubuntu/Debian
+sudo apt update
+sudo apt install git nodejs npm neovim ripgrep tree-sitter build-essential python3 unzip
+
+# Example for Arch
+sudo pacman -S git nodejs npm neovim ripgrep tree-sitter gcc make python unzip
+```
+
+---
+
 ### 1. Check Operating System
 
 ```bash
@@ -155,10 +236,10 @@ echo "Backup completed. Old configs saved with timestamp."
 
 ## Step 1: Install NVChad Base
 
-### 1.1. Clone NVChad Repository
+### 1.1. Clone NVChad Starter Repository
 
 ```bash
-# Clone NVChad
+# Clone NVChad starter
 git clone https://github.com/NvChad/starter ~/.config/nvim
 ```
 
@@ -199,7 +280,32 @@ nvim
 
 ## Step 2: Apply Cross-Platform Configuration
 
-### 2.1. Backup NVChad Starter Files
+### 2.1. Clone This Custom Configuration Repository
+
+This step clones the nvchad-config repository which contains the cross-platform keybindings and configuration.
+
+```bash
+# Clone the custom config repository
+git clone https://github.com/GareArc/nvchad-config.git /tmp/nvchad-config
+```
+
+**Verify**:
+```bash
+ls /tmp/nvchad-config
+```
+
+**Expected Output**: Should show `lua/`, `init.lua`, `docs/`, and other configuration files.
+
+**If clone fails, ask user**: "The repository could not be cloned. Please verify:
+1. Your internet connection is working
+2. GitHub is accessible
+3. The repository URL is correct (https://github.com/GareArc/nvchad-config.git)
+
+Would you like to try again? (yes/no)"
+
+---
+
+### 2.2. Backup NVChad Starter Files
 
 ```bash
 # Backup the starter files
@@ -207,27 +313,6 @@ cd ~/.config/nvim
 mkdir -p .backup
 mv lua/mappings.lua .backup/ 2>/dev/null || true
 ```
-
----
-
-### 2.2. Clone Custom Configuration Repository
-
-**Ask user**: "What is your GitHub username for the nvchad-config repository? (e.g., 'GareArc')"
-
-```bash
-# Set the username variable
-GITHUB_USER="<USER_PROVIDED_USERNAME>"
-
-# Clone the custom config repository
-git clone https://github.com/$GITHUB_USER/nvchad-config.git /tmp/nvchad-config
-```
-
-**If clone fails, ask user**: "The repository could not be cloned. Please verify:
-1. The GitHub username is correct
-2. The repository is public or you have access
-3. Your internet connection is working
-
-Would you like to try again with a different username? (yes/no)"
 
 ---
 
