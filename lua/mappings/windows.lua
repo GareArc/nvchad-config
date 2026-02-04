@@ -1,0 +1,1 @@
+-- Windows-specific mappings using Ctrl-based keybindings

@@ -1,0 +1,2 @@
+-- Common mappings shared across all platforms
+-- Platform-specific mappings are loaded separately in init.lua
