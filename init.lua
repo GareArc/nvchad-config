@@ -90,3 +90,5 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+vim.cmd.colorscheme "catppuccin-frappe"

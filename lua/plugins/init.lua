@@ -1,7 +1,15 @@
 return {
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      flavour = "frappe",
+    },
+  },
+
+  {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
