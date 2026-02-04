@@ -47,6 +47,12 @@ The installation guide will:
 - Handle errors and provide troubleshooting
 - Verify installation success
 
+For updating existing installation:
+
+```bash
+curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/UPDATE.md
+```
+
 For uninstallation:
 
 ```bash
