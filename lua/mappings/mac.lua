@@ -62,8 +62,14 @@ map("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
 -- LSP (using leader+l prefix)
 -- ============================================================================
 
+-- Leader-based LSP bindings
 map("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Go to definition" })
 map("n", "<leader>lr", vim.lsp.buf.references, { desc = "Find references" })
 map("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover info" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Rename symbol" })
+
+-- VSCode-style LSP bindings (F12, Shift+Option+F)
+map("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to definition" })
+map("i", "<F12>", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
+map("n", "<S-M-f>", ":Telescope lsp_references<CR>", { desc = "Find all references" })
