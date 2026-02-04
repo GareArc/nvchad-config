@@ -82,6 +82,11 @@ dofile(vim.g.base46_cache .. "statusline")
 require "options"
 require "nvchad.autocmds"
 
+-- Load platform-specific keybindings via the mappings module
+-- The mappings module (lua/mappings/init.lua) detects the OS and loads:
+-- - lua/mappings/common.lua (shared across all platforms)
+-- - lua/mappings/mac.lua (macOS with Cmd key)
+-- - lua/mappings/windows.lua (Windows/Linux with Ctrl key)
 vim.schedule(function()
   require "mappings"
 end)
