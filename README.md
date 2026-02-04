@@ -13,39 +13,45 @@ This is a custom cross-platform NvChad configuration with VSCode-compatible keyb
 
 ## Installation
 
-### 1. Install NvChad Configuration
+### For Human Users
 
+Follow the standard installation steps below, or see the [detailed installation guide](docs/INSTALLATION.md) for troubleshooting.
+
+#### Quick Install
+
+1. Install NvChad Configuration:
 ```shell
 curl -sSL https://raw.githubusercontent.com/GareArc/nvchad-config/refs/heads/main/install.sh | bash
 ```
 
-### 2. Install Language Servers
-
-Open Neovim and run:
+2. Install Language Servers:
 ```vim
 :MasonInstallAll
 ```
 
-### 3. Configure WezTerm (macOS only)
+3. Configure WezTerm (macOS only)
 
-For Cmd key support on macOS, you need to configure WezTerm to send Cmd keys as escape sequences to Neovim.
+For Cmd key support on macOS, you need to configure WezTerm to send Cmd keys as escape sequences to Neovim. See [Step 4 in the installation guide](docs/INSTALLATION.md#step-4-configure-wezterm-macos-only) for detailed instructions.
 
-**Option A: Use the provided WezTerm config**
+### For LLM Agents
 
-If you don't have a WezTerm config yet:
-```shell
-# Copy the example config (if provided in this repo)
-cp wezterm.lua.example ~/.wezterm.lua
+Fetch the installation guide and follow it step-by-step:
+
+```bash
+curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/INSTALLATION.md
 ```
 
-**Option B: Add to your existing WezTerm config**
+The installation guide will:
+- Check all prerequisites before proceeding
+- Ask for user confirmation at each step
+- Handle errors and provide troubleshooting
+- Verify installation success
 
-Add the Cmd key mappings to your `~/.wezterm.lua`. See the [WezTerm configuration guide](https://wezfurlong.org/wezterm/config/keys.html) for details.
+For uninstallation:
 
-The configuration should:
-- Send Cmd keys as `<D-key>` escape sequences to Neovim
-- Use IS_NVIM user variable for conditional key sending
-- Override Cmd+W and Cmd+F to pass through to Neovim
+```bash
+curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/UNINSTALLATION.md
+```
 
 ## Keybinding Categories
 
