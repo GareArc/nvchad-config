@@ -4,9 +4,12 @@
 
 ## Overview
 
-This guide will install a cross-platform NVChad configuration with VSCode-compatible keybindings that automatically adapts to your operating system:
-- **macOS**: Cmd-based shortcuts (⌘+S, ⌘+P, etc.)
+This guide will install a cross-platform NVChad configuration with VSCode-style keybindings using **Space as the leader key**:
+- **macOS**: Space leader shortcuts (Space+s to save, Space+p to find files, etc.)
 - **Windows/Linux**: Ctrl-based shortcuts (Ctrl+S, Ctrl+P, etc.)
+- **WezTerm (macOS)**: Native Cmd shortcuts for terminal operations (Cmd+T, Cmd+W, etc.)
+
+> **Note**: Terminals cannot send Cmd/Super keys to applications. This config uses Space as leader in Neovim, while WezTerm handles Cmd shortcuts for terminal-level operations.
 
 **Estimated Time**: 15-20 minutes
 
@@ -220,20 +223,6 @@ echo "Backup completed. Old configs saved with timestamp."
 
 ---
 
-### 5. Check Terminal (macOS only)
-
-**If on macOS, ask user**: "Are you using WezTerm, Kitty, Alacritty, iTerm2, or the default Terminal.app?
-- (a) WezTerm (Recommended for Cmd key support)
-- (b) Kitty
-- (c) Alacritty
-- (d) iTerm2
-- (e) Terminal.app
-- (f) Other"
-
-**Note**: For full Cmd key support on macOS, WezTerm, Kitty, or Alacritty with proper configuration is required. If using iTerm2 or Terminal.app, Cmd keys may not work as expected.
-
----
-
 ## Step 1: Install NVChad Base
 
 ### 1.1. Clone NVChad Starter Repository
@@ -423,9 +412,8 @@ Press `q` to close health check.
 **Skip this step if**:
 - You're NOT on macOS
 - You're NOT using WezTerm
-- You're okay with Ctrl-based shortcuts on Mac
 
-**Ask user (macOS only)**: "Would you like to configure WezTerm for Cmd key support? This enables macOS-native shortcuts like Cmd+S, Cmd+P, etc. (yes/no)"
+**Ask user (macOS only)**: "Would you like to configure WezTerm for macOS-native terminal shortcuts (Cmd+T for new tab, Cmd+W to close tab, etc.)? (yes/no)"
 
 **If user says no**: Skip to Step 5.
 
@@ -462,8 +450,8 @@ test -f ~/.wezterm.lua && echo "Config exists" || echo "No config found"
 ```
 
 **If config exists, ask user**: "An existing WezTerm configuration was found at ~/.wezterm.lua. What would you like to do?
-- (a) Backup existing config and merge with new Cmd key mappings
-- (b) Show me the diff first, then decide
+- (a) Backup existing config and replace with new config
+- (b) Show me the new config first, then decide
 - (c) Skip WezTerm configuration"
 
 #### Backup Existing Config (if user chooses option a):
@@ -475,63 +463,62 @@ echo "Backup created: ~/.wezterm.lua.backup.$(date +%Y%m%d_%H%M%S)"
 
 ---
 
-### 4.3. Get WezTerm Configuration Template
+### 4.3. Create WezTerm Configuration
 
-**Ask user**: "I need to add Cmd key mappings to your WezTerm config. Since the full configuration is not in the repository, I can:
-- (a) Provide you with the key mapping code to manually add to your config
-- (b) Attempt to automatically merge the mappings (requires reading your current config)
-- (c) Skip this step and you'll configure WezTerm later
+Create the WezTerm configuration file:
 
-Which option do you prefer?"
+```bash
+cat > ~/.wezterm.lua << 'EOF'
+local wezterm = require 'wezterm'
+local act = wezterm.action
 
-#### Option A: Provide Manual Instructions
+local config = wezterm.config_builder()
 
-**Tell user**:
+config.window_close_confirmation = 'NeverPrompt'
+config.color_scheme = 'Oceanic Next (Gogh)'
+config.font = wezterm.font('MesloLGS NF')
+config.font_size = 17
+config.default_cursor_style = 'BlinkingBar'
+config.disable_default_key_bindings = false
+config.window_background_opacity = 0.9
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
-"Please add the following section to your `~/.wezterm.lua` file. Find the `keys = {` section and add these mappings:
+config.keys = {
+  { key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain' },
+  { key = 'w', mods = 'CMD', action = act.CloseCurrentTab { confirm = true } },
+  { key = 'n', mods = 'CMD', action = act.SpawnWindow },
+  { key = 'LeftArrow', mods = 'CMD', action = act.SendString '\x1bb' },
+  { key = 'RightArrow', mods = 'CMD', action = act.SendString '\x1bf' },
+  { key = 'LeftArrow', mods = 'OPT', action = act.ActivateTabRelative(-1) },
+  { key = 'RightArrow', mods = 'OPT', action = act.ActivateTabRelative(1) },
+}
 
-```lua
--- Neovim Cmd key support (add to your keys table)
-local nvim_key = function(key, mods, escape_seq)
-  return {
-    key = key,
-    mods = mods,
+config.mouse_bindings = {
+  {
+    event = { Down = { streak = 1, button = "Right" } },
+    mods = "NONE",
     action = wezterm.action_callback(function(window, pane)
-      if window:get_user_var('IS_NVIM') == 'true' then
-        window:perform_action(act.SendString(escape_seq), pane)
+      local has_selection = window:get_selection_text_for_pane(pane) ~= ""
+      if has_selection then
+        window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
+        window:perform_action(act.ClearSelection, pane)
+      else
+        window:perform_action(act({ PasteFrom = "Clipboard" }), pane)
       end
-    end)
-  }
-end
+    end),
+  },
+}
 
--- File Operations
-nvim_key('s', 'CMD', '\\x1b[115;3u'),              -- Cmd+S
-nvim_key('s', 'CMD|SHIFT', '\\x1b[115;4u'),        -- Cmd+Shift+S
-nvim_key('w', 'CMD', '\\x1b[119;3u'),              -- Cmd+W (override WezTerm default)
-nvim_key('n', 'CMD', '\\x1b[110;3u'),              -- Cmd+N
-nvim_key('o', 'CMD', '\\x1b[111;3u'),              -- Cmd+O
-nvim_key('p', 'CMD', '\\x1b[112;3u'),              -- Cmd+P
-nvim_key('p', 'CMD|SHIFT', '\\x1b[112;4u'),        -- Cmd+Shift+P
-
--- Search
-nvim_key('f', 'CMD', '\\x1b[102;3u'),              -- Cmd+F (override WezTerm default)
-nvim_key('h', 'CMD', '\\x1b[104;3u'),              -- Cmd+H
-nvim_key('f', 'CMD|SHIFT', '\\x1b[102;4u'),        -- Cmd+Shift+F
-nvim_key('g', 'CMD', '\\x1b[103;3u'),              -- Cmd+G
-
--- Editing
-nvim_key('z', 'CMD', '\\x1b[122;3u'),              -- Cmd+Z
-nvim_key('x', 'CMD', '\\x1b[120;3u'),              -- Cmd+X
-nvim_key('c', 'CMD', '\\x1b[99;3u'),               -- Cmd+C
-nvim_key('v', 'CMD', '\\x1b[118;3u'),              -- Cmd+V
-nvim_key('/', 'CMD', '\\x1b[47;3u'),               -- Cmd+/
-
--- Add more mappings as needed (see full list in documentation)
+return config
+EOF
 ```
 
-For the complete list of all 50 shortcuts, see: `docs/WEZTERM_CONFIG.md`
+**Verify**:
+```bash
+wezterm ls-fonts 2>&1 | head -2
+```
 
-After adding these mappings, reload WezTerm or restart it."
+**Expected Output**: Should show font information without errors.
 
 ---
 
@@ -539,7 +526,7 @@ After adding these mappings, reload WezTerm or restart it."
 
 ```bash
 # Test that WezTerm config loads without errors
-wezterm cli list --format=json >/dev/null 2>&1 && echo "✓ WezTerm config is valid" || echo "✗ WezTerm config has errors"
+wezterm ls-fonts >/dev/null 2>&1 && echo "✓ WezTerm config is valid" || echo "✗ WezTerm config has errors"
 ```
 
 **If errors appear, ask user**: "WezTerm configuration has syntax errors. Would you like to:
@@ -582,11 +569,11 @@ nvim --headless -c "lua print(vim.uv.os_uname().sysname)" -c "quit" 2>&1 | grep 
 
 **For macOS**:
 ```bash
-# Check if Mac mappings are loaded (search for Cmd key mappings)
-grep -c "<D-" ~/.config/nvim/lua/mappings/mac.lua
+# Check if Mac mappings are loaded (search for leader key mappings)
+grep -c "<leader>" ~/.config/nvim/lua/mappings/mac.lua
 ```
 
-**Expected Output**: Should show a number >= 49 (the count of Cmd-based shortcuts)
+**Expected Output**: Should show a number >= 15 (the count of leader-based shortcuts)
 
 **For Windows/Linux**:
 ```bash
@@ -607,15 +594,21 @@ nvim
 
 **Test these shortcuts**:
 
-**On macOS**:
-- `Cmd+P` - Should open file finder (Telescope)
-- `Cmd+S` - Should save file (if file is open)
-- `Cmd+/` - Should toggle comment (in a file)
+**On macOS (Space leader)**:
+- `Space+p` - Should open file finder (Telescope)
+- `Space+s` - Should save file (if file is open)
+- `Space+/` - Should toggle comment (in a file)
+- `Space+b` - Should toggle sidebar (NvimTree)
 
-**On Windows/Linux**:
+**On Windows/Linux (Ctrl-based)**:
 - `Ctrl+P` - Should open file finder (Telescope)
 - `Ctrl+S` - Should save file (if file is open)
 - `Ctrl+/` - Should toggle comment (in a file)
+
+**WezTerm (macOS)**:
+- `Cmd+T` - Should open new tab
+- `Cmd+W` - Should close current tab
+- `Cmd+Left/Right` - Should jump by word in shell
 
 **Ask user**: "Did the shortcuts work as expected? (yes/no)"
 
@@ -646,30 +639,56 @@ echo "Backup files removed."
 
 ## Troubleshooting
 
-### Issue: "Cmd keys not working on macOS"
+### Issue: "Space leader shortcuts not working on macOS"
+
+**Diagnostic Steps**:
+
+1. **Check Leader Key Setting**:
+```bash
+grep "mapleader" ~/.config/nvim/init.lua
+```
+
+Expected: Should show `vim.g.mapleader = " "`
+
+2. **Check Mappings File Loaded**:
+```bash
+grep "<leader>" ~/.config/nvim/lua/mappings/mac.lua | head -5
+```
+
+Expected: Should show mappings like `<leader>s`, `<leader>p`, etc.
+
+3. **Test in Neovim**:
+   - Open Neovim: `nvim`
+   - Press `Space` and wait 1 second
+   - You should see which-key popup with available shortcuts
+
+**Solution**: Ensure `vim.g.mapleader = " "` is set BEFORE lazy.nvim loads.
+
+---
+
+### Issue: "WezTerm Cmd shortcuts not working"
 
 **Diagnostic Steps**:
 
 1. **Check WezTerm Configuration**:
 ```bash
-grep -i "IS_NVIM" ~/.wezterm.lua
+grep "CMD" ~/.wezterm.lua
 ```
 
-Expected: Should show IS_NVIM user variable configuration.
+Expected: Should show key bindings with `mods = 'CMD'`.
 
-2. **Check Terminal Type**:
+2. **Reload WezTerm Config**:
+   - Press `Cmd+Shift+R` in WezTerm, OR
+   - Quit and restart WezTerm
+
+3. **Check for Syntax Errors**:
 ```bash
-echo $TERM
+wezterm ls-fonts 2>&1 | head -3
 ```
 
-Expected: Should NOT be `xterm-256color` in WezTerm (should be `wezterm` or similar).
+Expected: Should show font info, not error messages.
 
-3. **Test Key Detection**:
-   - Open Neovim: `nvim`
-   - In insert mode, type: `<Ctrl-v>` then press `Cmd+S`
-   - Expected: Should see an escape sequence like `^[[115;3u`
-
-**Solution**: If IS_NVIM is not configured, return to Step 4.3 and add the WezTerm configuration.
+**Solution**: If config has errors, restore backup or recreate the config.
 
 ---
 
@@ -715,39 +734,70 @@ Check that language servers are installed (green checkmarks).
 
 ---
 
-### Issue: "Existing mappings not working"
+## Keybinding Reference
 
-**Diagnostic Steps**:
+### macOS (Space Leader)
 
-1. **Check Which Platform File is Loaded**:
-```bash
-nvim --headless -c "lua print(vim.uv.os_uname().sysname)" -c "quit" 2>&1 | grep -v "SetUserVar"
-```
+| Shortcut | Action |
+|----------|--------|
+| `Space+s` | Save file |
+| `Space+S` | Save all |
+| `Space+q` | Quit |
+| `Space+Q` | Quit all |
+| `Space+p` | Quick open (git files) |
+| `Space+P` | Command palette |
+| `Space+f` | Find in buffer |
+| `Space+F` | Find in files |
+| `Space+o` | Open file |
+| `Space+r` | Recent files |
+| `Space+b` | Toggle sidebar |
+| `Space+e` | Focus sidebar |
+| `Space+j` | Toggle terminal |
+| `Space+/` | Toggle comment |
+| `Space+x` | Close buffer |
+| `Tab` | Next buffer |
+| `Shift+Tab` | Previous buffer |
+| `Space+ld` | Go to definition |
+| `Space+lr` | Find references |
+| `Space+la` | Code action |
+| `Space+ln` | Rename symbol |
 
-2. **Check Old mappings.lua**:
-```bash
-test -f ~/.config/nvim/lua/mappings.lua && echo "Old file exists (should be removed)" || echo "Old file removed (correct)"
-```
+### WezTerm (macOS Terminal)
 
-**Solution**: Ensure old `mappings.lua` is removed or renamed to avoid conflicts.
+| Shortcut | Action |
+|----------|--------|
+| `Cmd+T` | New tab |
+| `Cmd+W` | Close tab |
+| `Cmd+N` | New window |
+| `Cmd+Left` | Jump word left |
+| `Cmd+Right` | Jump word right |
+| `Opt+Left` | Previous tab |
+| `Opt+Right` | Next tab |
+
+### Windows/Linux (Ctrl-based)
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+S` | Save file |
+| `Ctrl+P` | Quick open |
+| `Ctrl+F` | Find |
+| `Ctrl+/` | Toggle comment |
+| ... | (see windows.lua for full list) |
 
 ---
 
-## Installation Complete! 🎉
+## Installation Complete!
 
 Your cross-platform NVChad configuration is now installed and ready to use.
 
 **What's Next**:
 
-1. **Read the README**: `cat ~/.config/nvim/README.md` for full feature list
-2. **Learn Shortcuts**: All 49 VSCode shortcuts are documented in the README
-3. **Customize**: Modify `lua/mappings/common.lua` for personal mappings
-4. **Explore Plugins**: Run `:Lazy` to see all installed plugins
+1. **Learn Shortcuts**: Press `Space` in Neovim and wait for which-key popup
+2. **Customize**: Modify `lua/mappings/common.lua` for personal mappings
+3. **Explore Plugins**: Run `:Lazy` to see all installed plugins
 
 **Need Help?**
 
 - Check the troubleshooting section above
 - Review logs: `~/.local/state/nvim/log`
 - Open an issue on GitHub
-
-**Enjoy your new editor setup!** 🚀
