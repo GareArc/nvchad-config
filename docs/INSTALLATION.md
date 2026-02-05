@@ -759,6 +759,7 @@ Check that language servers are installed (green checkmarks).
 | `Shift+Tab` | Previous buffer |
 | `Space+ld` | Go to definition |
 | `Space+lr` | Find references |
+| `Space+lf` | Format buffer |
 | `Space+la` | Code action |
 | `Space+ln` | Rename symbol |
 

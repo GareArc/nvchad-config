@@ -68,6 +68,9 @@ map("n", "<leader>lr", vim.lsp.buf.references, { desc = "Find references" })
 map("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover info" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Rename symbol" })
+map("n", "<leader>lf", function()
+  require("conform").format { lsp_fallback = true }
+end, { desc = "Format buffer" })
 
 -- VSCode-style LSP bindings (F12, Shift+Option+F)
 map("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to definition" })
