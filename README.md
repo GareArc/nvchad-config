@@ -77,7 +77,7 @@ curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/UNINST
 - Undo/Redo, Cut/Copy/Paste, Comment, Multi-cursor, Delete Line, Move Line, Insert Line, Indent
 
 ### Navigation (8 shortcuts)
-- Go to Definition, Find References, Go to Symbol, Go Back/Forward, Scroll
+- Go to Definition, Find References, Go to Symbol, Go Back/Forward (Space+l+arrows), Scroll
 
 ### Window & View (9 shortcuts)
 - Toggle Sidebar, Toggle Terminal, Split Editor, Focus Editor Groups

@@ -764,6 +764,8 @@ Check that language servers are installed (green checkmarks).
 | `Space+lf` | Format buffer |
 | `Space+la` | Code action |
 | `Space+ln` | Rename symbol |
+| `Space+l+Left` | Go back in jump list |
+| `Space+l+Right` | Go forward in jump list |
 | `Cmd+Left/Right` | Start/End of line (in Neovim) |
 | `Opt+Left/Right` | Jump by word (in Neovim) |
 | `F12` | Go to definition |
@@ -790,6 +792,11 @@ Check that language servers are installed (green checkmarks).
 | `Ctrl+P` | Quick open |
 | `Ctrl+F` | Find |
 | `Ctrl+/` | Toggle comment |
+| `F12` | Go to definition |
+| `Alt+Left` | Go back in jump list |
+| `Alt+Right` | Go forward in jump list |
+| `Space+l+Left` | Go back in jump list (alternative) |
+| `Space+l+Right` | Go forward in jump list (alternative) |
 | ... | (see windows.lua for full list) |
 
 ---
