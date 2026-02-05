@@ -27,8 +27,8 @@ map("n", "<leader>r", ":Telescope oldfiles<CR>", { desc = "Recent files" })
 -- VIEW & SIDEBAR
 -- ============================================================================
 
-map("n", "<leader>b", ":NvimTreeToggle<CR>", { desc = "Toggle sidebar" })
-map("n", "<leader>e", ":NvimTreeFocus<CR>", { desc = "Focus sidebar" })
+map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle sidebar" })
+map("n", "<leader>b", ":NvimTreeFocus<CR>", { desc = "Focus sidebar" })
 
 -- ============================================================================
 -- TERMINAL

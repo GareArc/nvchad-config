@@ -598,7 +598,7 @@ nvim
 - `Space+p` - Should open file finder (Telescope)
 - `Space+s` - Should save file (if file is open)
 - `Space+/` - Should toggle comment (in a file)
-- `Space+b` - Should toggle sidebar (NvimTree)
+- `Space+e` - Should toggle sidebar (NvimTree)
 
 **On Windows/Linux (Ctrl-based)**:
 - `Ctrl+P` - Should open file finder (Telescope)
@@ -750,8 +750,8 @@ Check that language servers are installed (green checkmarks).
 | `Space+F` | Find in files |
 | `Space+o` | Open file |
 | `Space+r` | Recent files |
-| `Space+b` | Toggle sidebar |
-| `Space+e` | Focus sidebar |
+| `Space+e` | Toggle sidebar |
+| `Space+b` | Focus sidebar |
 | `Space+j` | Toggle terminal |
 | `Space+/` | Toggle comment |
 | `Space+x` | Close buffer |

@@ -53,6 +53,12 @@ For updating existing installation:
 curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/UPDATE.md
 ```
 
+For SSH usage (macOS to Linux servers):
+
+```bash
+curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/SSH_USAGE.md
+```
+
 For uninstallation:
 
 ```bash

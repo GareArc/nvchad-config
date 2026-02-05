@@ -533,7 +533,7 @@ After updating, verify:
 - [ ] LSP works (open code file, test completion)
 - [ ] Plugins loaded (run `:Lazy` - all green checkmarks)
 - [ ] Theme looks correct
-- [ ] File tree works (toggle with `Space+b` or `Ctrl+B`)
+- [ ] File tree works (toggle with `Space+e` or `Ctrl+B`)
 - [ ] Telescope works (search with `Space+p` or `Ctrl+P`)
 
 ---
