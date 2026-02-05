@@ -610,6 +610,7 @@ nvim
 - `Cmd+W` - Should close current tab
 - `Cmd+Left/Right` - Should jump to start/end of line
 - `Opt+Left/Right` - Should jump by word
+- `Opt+Cmd+Left/Right` - Should switch between tabs
 
 **Ask user**: "Did the shortcuts work as expected? (yes/no)"
 
