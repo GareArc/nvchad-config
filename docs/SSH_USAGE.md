@@ -100,6 +100,8 @@ Or test directly:
 
 ## Troubleshooting
 
+> **Detailed troubleshooting guide:** See [SSH_TROUBLESHOOTING.md](./SSH_TROUBLESHOOTING.md) for comprehensive diagnostics and fixes.
+
 ### Issue: "Space+e still doesn't work after ssh-mac"
 
 **Check environment variable:**

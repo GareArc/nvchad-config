@@ -50,6 +50,26 @@ map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
 -- ============================================================================
+-- CURSOR MOVEMENT (Cmd/Option+Arrow keys via WezTerm escape sequences)
+-- ============================================================================
+
+-- Cmd+RightArrow → End of line (WezTerm sends \x05 as <C-e>)
+map("i", "<C-e>", "<End>", { desc = "Move to end of line" })
+map("n", "<C-e>", "$", { desc = "Move to end of line" })
+
+-- Cmd+LeftArrow → Start of line (WezTerm sends \x01 as <C-a>)
+map("i", "<C-a>", "<Home>", { desc = "Move to start of line" })
+map("n", "<C-a>", "^", { desc = "Move to start of line" })
+
+-- Option+RightArrow → Forward one word (WezTerm sends \x1bf as <M-f>)
+map("i", "<M-f>", "<S-Right>", { desc = "Move forward one word" })
+map("n", "<M-f>", "w", { desc = "Move forward one word" })
+
+-- Option+LeftArrow → Back one word (WezTerm sends \x1bb as <M-b>)
+map("i", "<M-b>", "<S-Left>", { desc = "Move back one word" })
+map("n", "<M-b>", "b", { desc = "Move back one word" })
+
+-- ============================================================================
 -- BUFFERS
 -- ============================================================================
 

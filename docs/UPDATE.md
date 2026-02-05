@@ -29,17 +29,49 @@ Before updating, ensure:
 
 Choose the method that fits your needs:
 
-### Method 1: Quick Update (Recommended)
+### Method 1: Git Pull (Simplest)
 
-Use this if you haven't made custom modifications to the config files.
+Use this if your `~/.config/nvim` is already a git repository tracking this config.
 
-### Method 2: Manual Merge Update
+### Method 2: Quick Update (No Git)
+
+Use this if you haven't made custom modifications and don't use git.
+
+### Method 3: Manual Merge Update
 
 Use this if you've customized config files and want to preserve your changes.
 
 ---
 
-## Method 1: Quick Update
+## Method 1: Git Pull (Simplest)
+
+**Check if your config is a git repo:**
+
+```bash
+cd ~/.config/nvim
+git remote -v
+```
+
+**Expected output:**
+```
+origin  https://github.com/GareArc/nvchad-config (fetch)
+origin  https://github.com/GareArc/nvchad-config (push)
+```
+
+**If yes, just pull:**
+
+```bash
+cd ~/.config/nvim
+git pull
+```
+
+**Then skip to Step 4** (Update Plugins) below.
+
+**If no git repo:** Use Method 2 instead.
+
+---
+
+## Method 2: Quick Update (No Git)
 
 This method pulls the latest changes and applies them directly to your Neovim configuration.
 
@@ -173,7 +205,7 @@ If **no**: See troubleshooting section below.
 
 ---
 
-## Method 2: Manual Merge Update
+## Method 3: Manual Merge Update
 
 Use this method if you've made custom modifications and want to carefully merge updates.
 

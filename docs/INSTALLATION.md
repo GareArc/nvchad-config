@@ -608,7 +608,8 @@ nvim
 **WezTerm (macOS)**:
 - `Cmd+T` - Should open new tab
 - `Cmd+W` - Should close current tab
-- `Cmd+Left/Right` - Should jump by word in shell
+- `Cmd+Left/Right` - Should jump to start/end of line
+- `Opt+Left/Right` - Should jump by word
 
 **Ask user**: "Did the shortcuts work as expected? (yes/no)"
 
@@ -762,6 +763,9 @@ Check that language servers are installed (green checkmarks).
 | `Space+lf` | Format buffer |
 | `Space+la` | Code action |
 | `Space+ln` | Rename symbol |
+| `Cmd+Left/Right` | Start/End of line (in Neovim) |
+| `Opt+Left/Right` | Jump by word (in Neovim) |
+| `F12` | Go to definition |
 
 ### WezTerm (macOS Terminal)
 
@@ -770,10 +774,12 @@ Check that language servers are installed (green checkmarks).
 | `Cmd+T` | New tab |
 | `Cmd+W` | Close tab |
 | `Cmd+N` | New window |
-| `Cmd+Left` | Jump word left |
-| `Cmd+Right` | Jump word right |
-| `Opt+Left` | Previous tab |
-| `Opt+Right` | Next tab |
+| `Cmd+Left` | Start of line |
+| `Cmd+Right` | End of line |
+| `Opt+Left` | Jump word left |
+| `Opt+Right` | Jump word right |
+| `Opt+Cmd+Left` | Previous tab |
+| `Opt+Cmd+Right` | Next tab |
 
 ### Windows/Linux (Ctrl-based)
 
