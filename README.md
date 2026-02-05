@@ -70,8 +70,8 @@ curl -s https://raw.githubusercontent.com/GareArc/nvchad-config/main/docs/UNINST
 ### File Operations (9 shortcuts)
 - Save, Save As, Close, New File, Open File, Quick Open, Command Palette
 
-### Search & Replace (7 shortcuts)
-- Find, Replace, Find in Files, Replace in Files, Go to Line
+### Search & Replace (8 shortcuts)
+- Find, Replace, Find in Files, Replace in Files, Go to Line, Git Status
 
 ### Editing (11 shortcuts)
 - Undo/Redo, Cut/Copy/Paste, Comment, Multi-cursor, Delete Line, Move Line, Insert Line, Indent

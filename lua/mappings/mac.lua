@@ -20,6 +20,7 @@ map("n", "<leader>f", ":Telescope current_buffer_fuzzy_find<CR>", { desc = "Find
 map("n", "<leader>F", ":Telescope live_grep<CR>", { desc = "Find in files" })
 map("n", "<leader>p", ":Telescope git_files<CR>", { desc = "Quick open file" })
 map("n", "<leader>P", ":Telescope commands<CR>", { desc = "Command palette" })
+map("n", "<leader>G", ":Telescope git_status<CR>", { desc = "Git status" })
 map("n", "<leader>o", ":Telescope find_files<CR>", { desc = "Open file" })
 map("n", "<leader>r", ":Telescope oldfiles<CR>", { desc = "Recent files" })
 
