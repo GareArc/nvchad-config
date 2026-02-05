@@ -91,4 +91,4 @@ vim.schedule(function()
   require "mappings"
 end)
 
-vim.cmd.colorscheme "catppuccin-frappe"
+vim.cmd.colorscheme "catppuccin-latte"
