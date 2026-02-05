@@ -111,6 +111,7 @@ local telescope_builtin = require "telescope.builtin"
 map("n", "<C-A-p>", telescope_builtin.find_files, { desc = "Telescope find files" })
 map("n", "<C-p>", telescope_builtin.git_files, { desc = "Telescope find git files" })
 map("n", "<C-S-f>", telescope_builtin.live_grep, { desc = "Telescope live grep" })
+map("n", "<leader>th", ":Telescope themes<CR>", { desc = "Theme switcher" })
 
 -- ============================================================================
 -- WINDOW & BUFFER MANAGEMENT

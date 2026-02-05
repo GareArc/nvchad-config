@@ -23,6 +23,7 @@ map("n", "<leader>P", ":Telescope commands<CR>", { desc = "Command palette" })
 map("n", "<leader>G", ":Telescope git_status<CR>", { desc = "Git status" })
 map("n", "<leader>o", ":Telescope find_files<CR>", { desc = "Open file" })
 map("n", "<leader>r", ":Telescope oldfiles<CR>", { desc = "Recent files" })
+map("n", "<leader>th", ":Telescope themes<CR>", { desc = "Theme switcher" })
 
 -- ============================================================================
 -- VIEW & SIDEBAR
