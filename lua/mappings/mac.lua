@@ -97,3 +97,10 @@ end, { desc = "Format buffer" })
 map("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to definition" })
 map("i", "<F12>", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
 map("n", "<S-M-f>", ":Telescope lsp_references<CR>", { desc = "Find all references" })
+
+-- ============================================================================
+-- JUMP LIST NAVIGATION (Leader+l+arrows)
+-- ============================================================================
+
+map("n", "<leader>l<Left>", "<C-o>", { desc = "Go back in jump list" })
+map("n", "<leader>l<Right>", "<C-i>", { desc = "Go forward in jump list" })

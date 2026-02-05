@@ -133,6 +133,10 @@ map("n", "<A-Left>", "<C-o>", { desc = "Go to previous cursor position" })
 map("n", "<A-Right>", "<C-i>", { desc = "Go to next cursor position" })
 map("i", "<A-Left>", "<C-o>", { desc = "Go to previous cursor position" })
 map("i", "<A-Right>", "<C-i>", { desc = "Go to next cursor position" })
+
+map("n", "<leader>l<Left>", "<C-o>", { desc = "Go back in jump list" })
+map("n", "<leader>l<Right>", "<C-i>", { desc = "Go forward in jump list" })
+
 map("n", "<leader>gr", ":Telescope lsp_references<CR>", { desc = "Show references" })
 map("n", "<leader>G", ":Telescope git_status<CR>", { desc = "Git status" })
 
