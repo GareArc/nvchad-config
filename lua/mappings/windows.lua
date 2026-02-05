@@ -55,9 +55,13 @@ map("n", "<S-k>", ":resize -2<CR>")
 map("n", "<S-l>", ":vertical resize -2<CR>")
 map("n", "<S-h>", ":vertical resize +2<CR>")
 
--- Navigate buffers
-map("n", "<S-Right>", ":bnext<CR>")
-map("n", "<S-Left>", ":bprevious<CR>")
+-- Navigate buffers (visual order)
+map("n", "<S-Right>", function()
+  require("nvchad.tabufline").next()
+end, { desc = "Next buffer (visual order)" })
+map("n", "<S-Left>", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "Previous buffer (visual order)" })
 
 -- ============================================================================
 -- VISUAL MODE MAPPINGS
@@ -267,8 +271,12 @@ map("n", "<C-S-f>", telescope_builtin.live_grep, { desc = "VSCode: Show search" 
 map("n", "<C-S-g>", ":Telescope git_status<CR>", { desc = "VSCode: Show source control" })
 
 -- TAB/BUFFER (5)
-map("n", "<C-Tab>", ":bnext<CR>", { desc = "VSCode: Next editor" })
-map("n", "<C-S-Tab>", ":bprevious<CR>", { desc = "VSCode: Previous editor" })
+map("n", "<C-Tab>", function()
+  require("nvchad.tabufline").next()
+end, { desc = "VSCode: Next editor (visual order)" })
+map("n", "<C-S-Tab>", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "VSCode: Previous editor (visual order)" })
 map("n", "<C-k><C-w>", ":bdelete<CR>", { desc = "VSCode: Close editor (multi-key)" })
 map("n", "<C-k>w", ":bdelete<CR>", { desc = "VSCode: Close editor (alt multi-key)" })
 map("n", "<C-S-t>", ":e#<CR>", { desc = "VSCode: Reopen closed editor" })

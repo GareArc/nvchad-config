@@ -76,8 +76,12 @@ map("n", "<M-b>", "b", { desc = "Move back one word" })
 
 map("n", "<leader>x", ":bdelete<CR>", { desc = "Close buffer" })
 map("n", "<leader>X", ":%bdelete<CR>", { desc = "Close all buffers" })
-map("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
-map("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<Tab>", function()
+  require("nvchad.tabufline").next()
+end, { desc = "Next buffer (visual order)" })
+map("n", "<S-Tab>", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "Previous buffer (visual order)" })
 
 -- ============================================================================
 -- LSP (using leader+l prefix)
