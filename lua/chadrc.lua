@@ -10,6 +10,6 @@ M.base46 = {
 	transparency = false,
 }
 
-M.colorscheme = "catppuccin-frappe"
+M.colorscheme = "catppuccin-latte"
 
 return M
