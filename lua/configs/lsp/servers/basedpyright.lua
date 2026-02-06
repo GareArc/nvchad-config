@@ -2,6 +2,8 @@ local defaults = require("configs.lsp.defaults")
 local util = require("configs.lsp.util")
 
 return defaults.make_config {
+  cmd = { "basedpyright-langserver", "--stdio" },
+  filetypes = { "python" },
   root_dir = util.root_pattern("pyrightconfig.json", "pyproject.toml", ".git"),
   
   on_new_config = function(config, root_dir)
