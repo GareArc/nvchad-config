@@ -2,20 +2,16 @@ require("nvchad.configs.lspconfig").defaults()
 
 local defaults = require("configs.lsp.defaults")
 
-local basic_servers = {
-  html = {
-    cmd = { "vscode-html-language-server", "--stdio" },
-    filetypes = { "html" },
-  },
-  cssls = {
-    cmd = { "vscode-css-language-server", "--stdio" },
-    filetypes = { "css", "scss", "less" },
-  },
-}
+vim.lsp.config("html", defaults.make_config {
+  cmd = { "vscode-html-language-server", "--stdio" },
+  filetypes = { "html" },
+})
 
-for name, config in pairs(basic_servers) do
-  vim.lsp.config(name, defaults.make_config(config))
-  vim.lsp.enable(name)
-end
+vim.lsp.config("cssls", defaults.make_config {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  filetypes = { "css", "scss", "less" },
+})
 
 require("configs.lsp")
+
+vim.lsp.enable {"html", "cssls"}
