@@ -7,7 +7,12 @@ local M = {}
 function M.root_pattern(...)
   local patterns = vim.tbl_flatten({ ... })
   
-  return function(fname)
+  return function(bufnr)
+    local fname = type(bufnr) == 'number' and vim.api.nvim_buf_get_name(bufnr) or bufnr
+    if fname == '' then
+      return nil
+    end
+    
     local found = vim.fs.find(patterns, {
       upward = true,
       path = vim.fs.dirname(fname),
