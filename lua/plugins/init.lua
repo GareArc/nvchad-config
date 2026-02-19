@@ -33,6 +33,8 @@ return {
         "python",
         "go",
         "javascript",
+        "typescript",
+        "tsx",
         "cpp",
       },
       auto_install = true,
