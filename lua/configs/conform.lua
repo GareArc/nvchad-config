@@ -1,6 +1,6 @@
 local options = {
   formatters_by_ft = {
-    python = { "isort", "autopep8" },
+    python = { "ruff_organize_imports", "ruff_format" },
     go = { "gofmt", "goimports" },
     markdown = { "prettier" },
     ["_"] = { "prettier" },

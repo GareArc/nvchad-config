@@ -13,4 +13,13 @@ return defaults.make_config {
       config.cmd = { venv_pyrefly, 'lsp' }
     end
   end,
+
+  -- Force type errors to always show without needing a pyrefly.toml
+  settings = {
+    python = {
+      pyrefly = {
+        displayTypeErrors = "force-on",
+      },
+    },
+  },
 }

@@ -47,4 +47,8 @@ M.ui = {
   },
 }
 
+M.mason = {
+  pkgs = { "pyrefly" },
+}
+
 return M
