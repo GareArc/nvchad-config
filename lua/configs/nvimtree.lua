@@ -13,7 +13,11 @@ return {
     enable = true,
   },
   view = {
-    width = 30,
+    width = {
+      min = 30,
+      max = -1,
+      padding = 1,
+    },
     preserve_window_proportions = true,
   },
   renderer = {
