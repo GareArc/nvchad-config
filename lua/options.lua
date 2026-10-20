@@ -41,7 +41,7 @@ opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift 
 opt.wrap = false -- display lines as one long line
 opt.scrolloff = 8 -- is one of my fav
 opt.sidescrolloff = 8
-opt.guifont = "FiraCode Nerd Font Mono:h17" -- the font used in graphical neovim applications
+opt.guifont = "Maple Mono NF CN:h17" -- the font used in graphical neovim applications
 
 opt.shortmess:append "c"
 
